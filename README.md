@@ -65,6 +65,12 @@ If you want to remove data on tear down, use:
 docker compose down -v
 ```
 
+## Pull Updates
+
+```bash
+git pull && git submodule update --init --recursive
+```
+
 ## What this repo is for:
 
 - Running the full application locally with minimal setup
