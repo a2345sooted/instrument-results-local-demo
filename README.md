@@ -39,7 +39,7 @@ Create a local env file:
 cp .env.example .env
 ```
 
-Build and start the full stack:
+Build and start the full stack (the first build may take a minute):
 
 ```bash
 docker compose up --build
