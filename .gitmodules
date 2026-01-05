@@ -1,0 +1,6 @@
+[submodule "instrument-results-service"]
+	path = instrument-results-service
+	url = https://github.com/a2345sooted/instrument-results-service.git
+[submodule "instrument-results-ui"]
+	path = instrument-results-ui
+	url = https://github.com/a2345sooted/instrument-results-ui

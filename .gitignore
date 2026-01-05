@@ -55,9 +55,3 @@ dist/
 .gradle/
 target/
 
-############################################
-# Submodule working dirs (INTENTIONAL)
-# These repos are brought in as submodules
-############################################
-instrument-results-service/
-instrument-results-ui/
