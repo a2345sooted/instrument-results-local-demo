@@ -51,6 +51,7 @@ Once everything is running:
 
 - **UI:** http://localhost:4200
 - **API:** http://localhost:8080
+- **API Docs:** http://localhost:8080/swagger-ui/index.html
 
 ## Tear Down
 
@@ -68,8 +69,6 @@ docker compose down -v
 
 - Running the full application locally with minimal setup
 - Demoing or reviewing the system
-
-Running the full application locally with minimal 
 
 ## What this repo is not for:
 
