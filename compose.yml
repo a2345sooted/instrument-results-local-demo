@@ -1,0 +1,50 @@
+name: instrument-results
+
+services:
+  db:
+    image: postgres:16
+    container_name: instrument-results-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-instrument_results}
+      POSTGRES_USER: ${POSTGRES_USER:-instrument}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-instrument}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-instrument} -d ${POSTGRES_DB:-instrument_results}"
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  service:
+    build:
+      context: ./instrument-results-service
+    container_name: instrument-results-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-instrument_results}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-instrument}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-instrument}
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-local}
+    ports:
+      - "${SERVICE_PORT:-8080}:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  ui:
+    build:
+      context: ./instrument-results-ui
+    container_name: instrument-results-ui
+    ports:
+      - "${UI_PORT:-4200}:80"
+    depends_on:
+      - service
+
+volumes:
+  pgdata:
